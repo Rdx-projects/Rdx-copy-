@@ -1,15 +1,13 @@
 module.exports.config = {
-	name: "uns",
-	version: "1.0.5",
-	permission: 2,
-	credits: "Nayan",
-	prefix: true,
-	description: "ban or unblock users",
-	category: "admin",
-	usages: " ",
-	cooldowns: 5
+	name: "unsend",
+	version: "1.0.1",
+	hasPermssion: 0,
+	credits: "Mirai Team",
+	description: "Gỡ tin nhắn của bot",
+	commandCategory: "system",
+	usages: "unsend",
+	cooldowns: 0
 };
-
 
 module.exports.languages = {
 	"vi": {
@@ -17,8 +15,8 @@ module.exports.languages = {
 		"missingReply": "Hãy reply tin nhắn cần gỡ."
 	},
 	"en": {
-		"returnCant": "Can't to unsend message from other user.",
-		"missingReply": "Reply to the message you want to unsend."
+		"returnCant": "Kisi Aur Ka Msg M Kese Unsend Karu.",
+		"missingReply": "Mere Jis Msg ko Unsend Karna Hai Usme Reply Karke Likkho."
 	}
 }
 
