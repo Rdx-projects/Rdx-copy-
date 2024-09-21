@@ -1,18 +1,19 @@
-module.exports = {
-  config: {
-    name: "out",
-  version: "1.0.5",
-  credits: "nayan",
-  prefix: false,
-  permission: 2,
-  description: "out bot",
-  category: "admin",
-  cooldowns: 5
-},
+module.exports.config = {
+  name: "leave",
+  version: "1.0.0",
+  hasPermssion: 2,
+  credits: "HungCho",
+  description: "out box",
+  commandCategory: "Admin",
+  usages: "out [tid]",
+  cooldowns: 3
+};
 
-start: async function({ nayan, events, args }) {
-        if (!args[0]) return nayan.removeUserFromGroup(nayan.getCurrentUserID(), events.threadID);
-  nayan.reply("gd bye", events.threadID)
-        if (!isNaN(args[0])) return nayan.removeUserFromGroup(nayan.getCurrentUserID(), args.join(" "));
-}
+module.exports.run = async function({ api, event, args }) {
+    const tid = args.join(" ")
+   let namee = await api.getThreadInfo(tid)
+  if (!tid) return api.removeUserFromGroup(api.getCurrentUserID(), event.threadID);
+
+else return api.removeUserFromGroup(api.getCurrentUserID(), tid, () => api.sendMessage("The bot has left this group", event.threadID, event.messageID));
+
 }

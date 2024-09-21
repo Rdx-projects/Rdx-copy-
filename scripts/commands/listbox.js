@@ -1,13 +1,12 @@
 module.exports.config = {
-  name: "listbox",
-	version: "0.0.2",
-	permission: 2,
-  prefix: true,
-	credits: "Nayan",
-	description: "sendmsg",
-	category: "admin",
-	usages: "",
-    cooldowns: 5,
+  name: 'listbox',
+  version: '1.0.0',
+  credits: 'manhIT',
+  hasPermssion: 2,
+  description: 'List thread bot participated',
+  commandCategory: 'System',
+  usages: 'listbox',
+  cooldowns: 15
 };
 
 
@@ -28,13 +27,13 @@ module.exports.handleReply = async function({ api, event, args, Threads, handleR
           data.banned = 1;
           await Threads.setData(idgr, { data });
           global.data.threadBanned.set(parseInt(idgr), 1);
-          api.sendMessage(`[${idgr}] Successfully granted!`, event.threadID, event.messageID);
+          api.sendMessage(`[${idgr}] It was successful!`, event.threadID, event.messageID);
           break;
         }
 
         if (arg[0] == "out" || arg[0] == "Out") {
           api.removeUserFromGroup(`${api.getCurrentUserID()}`, idgr);
-          api.sendMessage("Out of thread with id: " + idgr + "\n" + (await Threads.getData(idgr)).name, event.threadID, event.messageID);
+          api.sendMessage("Out thread with id: " + idgr + "\n" + (await Threads.getData(idgr)).name, event.threadID, event.messageID);
           break;
         }
 
@@ -76,7 +75,7 @@ module.exports.run = async function({ api, event, client }) {
     groupid.push(group.id);
   }
 
-  api.sendMessage(msg + 'Reply "out" or "ban" + order number to exit or ban that thread!!', event.threadID, (e, data) =>
+  api.sendMessage(msg + 'Reply "out" or "ban" the number of order to out or ban that thread!!', event.threadID, (e, data) =>
     global.client.handleReply.push({
       name: this.config.name,
       author: event.senderID,
