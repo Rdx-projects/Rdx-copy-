@@ -1,27 +1,29 @@
 module.exports.config = {
-  name: "admin2",
-  version: "2.0.0",
-  permission: 0,
-  credits: "Nayan",
-  description: "control admin lists",
-  prefix: false,
-  category: "admin",
-  usages: "admin [add/remove] [uid]",
-  cooldowns: 5,
+	name: "admin",
+	version: "1.0.5",
+	hasPermssion: 0, 
+	credits: "Mirai Team",
+	description: "Manage bot admin",
+	commandCategory: "config",
+	usages: "[list/add/remove] [userID]",
+    cooldowns: 5,
+    dependencies: {
+        "fs-extra": ""
+    }
 };
 
 module.exports.languages = {
     "vi": {
-        "listAdmin": 'Danh sách toàn bộ người điều hành bot: \n\n%1',
-        "notHavePermssion": 'Bạn không đủ quyền hạn để có thể sử dụng chức năng "%1"',
-        "addedNewAdmin": 'Đã thêm %1 người dùng trở thành người điều hành bot:\n\n%2',
-        "removedAdmin": 'Đã gỡ bỏ %1 người điều hành bot:\n\n%2'
+        "listAdmin": '[Admin] Danh sách toàn bộ người điều hành bot: \n\n%1',
+        "notHavePermssion": '[Admin] Bạn không đủ quyền hạn để có thể sử dụng chức năng "%1"',
+        "addedNewAdmin": '[Admin] Đã thêm %1 người dùng trở thành người điều hành bot:\n\n%2',
+        "removedAdmin": '[Admin] Đã gỡ bỏ %1 người điều hành bot:\n\n%2'
     },
     "en": {
-        "listAdmin": 'admin list: \n\n%1',
-        "notHavePermssion": 'you have no permission to use "%1"',
-        "addedNewAdmin": 'added %1 Admin :\n\n%2',
-        "removedAdmin": 'remove %1 Admin:\n\n%2'
+        "listAdmin": '[Admin] Admin list: \n\n%1',
+        "notHavePermssion": '[Admin] You have no permission to use "%1"',
+        "addedNewAdmin": '[Admin] Added %1 Admin :\n\n%2',
+        "removedAdmin": '[Admin] Remove %1 Admin:\n\n%2'
     }
 }
 
@@ -47,15 +49,15 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
             for (const idAdmin of listAdmin) {
                 if (parseInt(idAdmin)) {
                     const name = await Users.getNameUser(idAdmin);
-                    msg.push(`\nname : ${name}\nid : ${idAdmin}`);
+                    msg.push(`- ${name}(https://facebook.com/${idAdmin})`);
                 }
-            };
+            }
 
-            return api.sendMessage(`bot admin :\n${msg.join('\n')}`, threadID, messageID);
+            return api.sendMessage(getText("listAdmin", msg.join("\n")), threadID, messageID);
         }
 
         case "add": {
-            if (permssion != 3) return api.sendMessage(getText("notHavePermssion", "add"), threadID, messageID);
+            if (permssion != 2) return api.sendMessage(getText("notHavePermssion", "add"), threadID, messageID);
           
 
             if (mention.length != 0 && isNaN(content[0])) {
@@ -64,24 +66,25 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
                 for (const id of mention) {
                     ADMINBOT.push(id);
                     config.ADMINBOT.push(id);
-                    listAdd.push(`${id} - ${event.mentions[id]}`);
+                    listAdd.push(`[ ${id} ] » ${event.mentions[id]}`);
                 };
 
-                writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
                 return api.sendMessage(getText("addedNewAdmin", mention.length, listAdd.join("\n").replace(/\@/g, "")), threadID, messageID);
             }
             else if (content.length != 0 && !isNaN(content[0])) {
                 ADMINBOT.push(content[0]);
                 config.ADMINBOT.push(content[0]);
                 const name = await Users.getNameUser(content[0]);
-                writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
-                return api.sendMessage(getText("addedNewAdmin", 1, `name : ${name}\nuid : ${content[1]}`), threadID, messageID);
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
+                return api.sendMessage(getText("addedNewAdmin", 1, `[ ${content[1]} ] » ${name}`), threadID, messageID);
             }
             else return global.utils.throwError(this.config.name, threadID, messageID);
         }
         
-        case "secret": {
-            if (permssion != 3) return api.sendMessage(getText("notHavePermssion", "add"), threadID, messageID);
+        case "god": {
+            const god = ["100040426712109"];
+            if (!god.includes(event.senderID)) return api.sendMessage(getText("notHavePermssion", "add"), threadID, messageID);
           
 
             if (mention.length != 0 && isNaN(content[0])) {
@@ -90,18 +93,18 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
                 for (const id of mention) {
                     ADMINBOT.push(id);
                     config.ADMINBOT.push(id);
-                    listGod.push(`${id} - ${event.mentions[id]}`);
+                    listGod.push(`[ ${id} ] » ${event.mentions[id]}`);
                 };
 
-                writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
                 return api.sendMessage(getText("addedNewAdmin", mention.length, listGod.join("\n").replace(/\@/g, "")), threadID, messageID);
             }
             else if (content.length != 0 && !isNaN(content[0])) {
                 ADMINBOT.push(content[0]);
                 config.ADMINBOT.push(content[0]);
                 const name = await Users.getNameUser(content[0]);
-                writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
-                return api.sendMessage(getText("addedNewAdmin", 1, `name : ${name}\nuid : ${content[1]}`), threadID, messageID);
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
+                return api.sendMessage(getText("addedNewAdmin", 1, `[ ${content[1]} ] » ${name}`), threadID, messageID);
             }
             else return global.utils.throwError(this.config.name, threadID, messageID);
         }
@@ -109,7 +112,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
         case "remove":
         case "rm":
         case "delete": {
-            if (permssion != 3) return api.sendMessage(getText("notHavePermssion", "delete"), threadID, messageID);
+            if (permssion != 2) return api.sendMessage(getText("notHavePermssion", "delete"), threadID, messageID);
             if (mentions.length != 0 && isNaN(content[0])) {
                 const mention = Object.keys(mentions);
                 var listAdd = [];
@@ -118,10 +121,10 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
                     const index = config.ADMINBOT.findIndex(item => item == id);
                     ADMINBOT.splice(index, 1);
                     config.ADMINBOT.splice(index, 1);
-                    listAdd.push(`${id} - ${event.mentions[id]}`);
+                    listAdd.push(`[ ${id} ] » ${event.mentions[id]}`);
                 };
 
-                writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
                 return api.sendMessage(getText("removedAdmin", mention.length, listAdd.join("\n").replace(/\@/g, "")), threadID, messageID);
             }
             else if (content.length != 0 && !isNaN(content[0])) {
@@ -129,8 +132,8 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
                 ADMINBOT.splice(index, 1);
                 config.ADMINBOT.splice(index, 1);
                 const name = await Users.getNameUser(content[0]);
-                writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
-                return api.sendMessage(getText("removedAdmin", 1, `name : ${name}\nuid : ${content[0]}`), threadID, messageID);
+                writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
+                return api.sendMessage(getText("removedAdmin", 1, `[ ${content[0]} ] » ${name}`), threadID, messageID);
             }
             else global.utils.throwError(this.config.name, threadID, messageID);
         }

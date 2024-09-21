@@ -1,14 +1,13 @@
 //idea by Adrestia Croimoux
 module.exports.config = {
-  name: "dictionary ",
-  version: "1.0.0",
-  permssion: 0,
-  prefix: true,
-  credits: "nayan",
-  description: "",
-  usage: "[text]",
-  category: "study",
-    cooldowns: 5
+	name: "dictionary",
+	version: "1.0.0",
+	hasPermssion: 0,
+	credits: "DungUwU",
+	description: "Check dictionary",
+  	usage: "[text]",
+	commandCategory: "Utilities",
+  	cooldowns: 5
 }
 
 module.exports.run = function({api,event,args}) {
