@@ -1,15 +1,14 @@
 module.exports.config = {
 	name: "post",
 	version: "1.0.0",
-	permission: 3,
-	credits: "ryuko",
-	prefix: true,
-	description: "create a new post in acc bot",
-	category: "operator",
+	hasPermssion: 2,
+	credits: "NTKhang",
+	description: "Create a new post in acc bot",
+	commandCategory: "Tiện ích",
 	cooldowns: 5
 };
 
-module.exports.run = async ({ event, api, getText, args }) => {
+module.exports.run = async ({ event, api }) => {
   const { threadID, messageID, senderID } = event;
   const uuid = getGUID();
   const formData = {
@@ -73,7 +72,7 @@ module.exports.run = async ({ event, api, getText, args }) => {
     "canUserManageOffers": false
   };
   
-  return api.sendMessage(`choose an audience that can see this article of yours\n1. everyone\n2. friend\n3. Only me`, threadID, (e, info) => {
+  return api.sendMessage(`Choose an audience that can see this article of yours\n1. Everyone\n2. Friend\n3. Only me`, threadID, (e, info) => {
     global.client.handleReply.push({
       name: this.config.name,
       messageID: info.messageID,
@@ -107,10 +106,10 @@ const fs = require("fs-extra");
   }
   
   if (type == "whoSee") {
-    if (!["1", "2", "3"].includes(body)) return api.sendMessage('please choose 1 of the 3 items above', threadID, messageID);
+    if (!["1", "2", "3"].includes(body)) return api.sendMessage('Please choose 1 of the 3 items above', threadID, messageID);
     formData.input.audience.privacy.base_state = body == 1 ? "EVERYONE" : body == 2 ? "FRIENDS" : "SELF";
     api.unsendMessage(handleReply.messageID, () => {
-      api.sendMessage(`reply to this message with the content of the article, if you want to leave it blank, please reply 0`, threadID, (e, info) => {
+      api.sendMessage(`Reply to this message with the content of the article, if you want to leave it blank, please reply 0`, threadID, (e, info) => {
         global.client.handleReply.push({
           name: this.config.name,
           messageID: info.messageID,
@@ -124,7 +123,7 @@ const fs = require("fs-extra");
   else if (type == "content") {
     if (event.body != "0") formData.input.message.text = event.body;
     api.unsendMessage(handleReply.messageID, () => {
-      api.sendMessage(`reply to this message with a photo (you can send multiple photos, if you don't want to post pictures, please reply 0`, threadID, (e, info) => {
+      api.sendMessage(`Reply to this message with a photo (you can send multiple photos, if you don't want to post pictures, please reply 0`, threadID, (e, info) => {
         global.client.handleReply.push({
           name: this.config.name,
           messageID: info.messageID,
@@ -247,7 +246,7 @@ const fs = require("fs-extra");
           //fs.unlinkSync(__dirname + "/cache/videoPost.mp4");
         }
         catch(e) {}
-        return api.sendMessage(`post created successfully\n\npost id : ${postID}\nlink : ${urlPost}`, threadID, messageID);
+        return api.sendMessage(`» Post created successfully\n» postID: ${postID}\n» urlPost: ${urlPost}`, threadID, messageID);
 		  }
 		  catch (e) {
 				//console.log(e)
@@ -270,4 +269,4 @@ function getGUID() {
     return _guid;
   });
   return id;
-    }
+                                   }

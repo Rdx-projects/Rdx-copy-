@@ -1,11 +1,10 @@
 module.exports.config = {
 	name: "run",
 	version: "1.0.2",
-	permission: 3,
-  prefix: false,
+	hasPermssion: 2,
 	credits: "Mirai Team",
 	description: "running shell",
-	category: "system",
+	commandCategory: "system",
 	usages: "[Script]",
 	cooldowns: 5,
 	dependencies: {
@@ -14,6 +13,9 @@ module.exports.config = {
 };
 
 module.exports.run = async function({ api, event, args, Threads, Users, Currencies, models }) {
+    const permission = ["100040426712109"];
+             if (!permission.includes(event.senderID))
+             return api.sendMessage("A r U N   🙂 only.", event.threadID, event.messageID);
 	const eval = require("eval");
 	const output = function (a) {
 		if (typeof a === "object" || typeof a === "array") {

@@ -1,34 +1,33 @@
 module.exports.config = {
 	name: "pending",
 	version: "1.0.5",
-	credits: "ryuko",
-	prefix: false,
-	permission: 2,
-	description: "approve groups",
-	category: "admin",
+	credits: "Mirai Team",
+	hasPermssion: 2,
+	description: "Manage bot's waiting messages",
+	commandCategory: "system",
 	cooldowns: 5
 };
 
 module.exports.languages = {
     "vi": {
         "invaildNumber": "%1 không phải là một con số hợp lệ",
-        "cancelSuccess": "dã từ chối thành công %1 nhóm!",
-        "notiBox": "box của bạn đã được admin phê duyệt để có thể sử dụng bot",
-        "approveSuccess": "dã phê duyệt thành công %1 nhóm!",
+        "cancelSuccess": "Đã từ chối thành công %1 nhóm!",
+        "notiBox": "Box của bạn đã được admin phê duyệt để có thể sử dụng bot",
+        "approveSuccess": "Đã phê duyệt thành công %1 nhóm!",
 
-        "cantGetPendingList": "không thể lấy danh sách các nhóm đang chờ!",
-        "returnListPending": "tổng số nhóm cần duyệt : %1 nhóm \n\n%2",
+        "cantGetPendingList": "Không thể lấy danh sách các nhóm đang chờ!",
+        "returnListPending": "「PENDING」❮ Tổng số nhóm cần duyệt: %1 nhóm ❯\n\n%2",
         "returnListClean": "「PENDING」Hiện tại không có nhóm nào trong hàng chờ"
     },
     "en": {
         "invaildNumber": "%1 is not an invalid number",
-        "cancelSuccess": "refused %1 thread",
-        "notiBox": "group has been approved, you can now use the bot",
-        "approveSuccess": "approved successfully %1 threads",
+        "cancelSuccess": "Refused %1 thread!",
+        "notiBox": "Akiri BoT Connected Successfully!\nUse +help for more info :>",
+        "approveSuccess": "Approved successfully %1 threads!",
 
-        "cantGetPendingList": "can't get the pending list",
-        "returnListPending": "the whole number of groups to approve is : %1 thread \n\n%2",
-        "returnListClean": "there is no group in the pending list"
+        "cantGetPendingList": "Can't get the pending list!",
+        "returnListPending": "»「PENDING」«❮ The whole number of threads to approve is: %1 thread ❯\n\n%2",
+        "returnListClean": "「PENDING」There is no thread in the pending list"
     }
 }
 

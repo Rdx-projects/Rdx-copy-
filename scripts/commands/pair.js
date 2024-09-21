@@ -1,18 +1,16 @@
-
 module.exports.config = {
   name: "pair",
   version: "1.0.0",
-  hermssion: 0,
-  prefix: true,
-  credits: "Nayan",
+  hasPermssion: 0,
+  credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
   description: "It's a compound :>",
-  category: "fun",
+  commandCategory: "Giải trí",
   usages: "",
   dependencies: {
         "axios": "",
         "fs-extra": ""
   },
-  cooldowns: 15
+  cooldowns: 0
 }
 
 module.exports.run = async function ({ args, Users, Threads, api, event, Currencies }) {
@@ -22,7 +20,7 @@ module.exports.run = async function ({ args, Users, Threads, api, event, Currenc
   let pathImg = __dirname + "/cache/background.png";
   let pathAvt1 = __dirname + "/cache/Avtmot.png";
   let pathAvt2 = __dirname + "/cache/Avthai.png";
-
+  
   var id1 = event.senderID;
   var name1 = await Users.getNameUser(id1);
   var ThreadInfo = await api.getThreadInfo(event.threadID);
@@ -57,16 +55,16 @@ module.exports.run = async function ({ args, Users, Threads, api, event, Currenc
   var cc = ["0", "-1", "99,99", "-99", "-100", "101", "0,01"];
   var rd2 = cc[Math.floor(Math.random() * cc.length)];
   var djtme = [`${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd2}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`];
-
+  
   var tile = djtme[Math.floor(Math.random() * djtme.length)];
 
   var background = [
-  "https://i.postimg.cc/wjJ29HRB/background1.png",
-  "https://i.postimg.cc/zf4Pnshv/background2.png",
-  "https://i.postimg.cc/5tXRQ46D/background3.png"
+  "https://i.postimg.cc/4yzBVM2V/Picsart-23-06-10-08-56-28-729.png",
+  "https://i.postimg.cc/qRpfNsvm/Picsart-23-06-10-08-51-59-268.png",
+  "https://i.postimg.cc/jSzXjY06/Picsart-23-06-10-08-25-38-156.jpg"
   ];
   var rd = background[Math.floor(Math.random() * background.length)];
-
+  
   let getAvtmot = (
     await axios.get(
       `https://graph.facebook.com/${id1}/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`,
@@ -102,7 +100,7 @@ module.exports.run = async function ({ args, Users, Threads, api, event, Currenc
   fs.writeFileSync(pathImg, imageBuffer);
   fs.removeSync(pathAvt1);
   fs.removeSync(pathAvt2);
-  return api.sendMessage({ body: `Congratulations, ${name1} successfully paired with ${name2}\nThe odds are ${tile}%`,
+  return api.sendMessage({ body: `Congratulations ${name1} successfully paired with ${name2}\nThe odds are ${tile}%`,
             mentions: [{
           tag: `${name2}`,
           id: id2
@@ -110,4 +108,4 @@ module.exports.run = async function ({ args, Users, Threads, api, event, Currenc
       event.threadID,
       () => fs.unlinkSync(pathImg),
       event.messageID);
-}
+  }

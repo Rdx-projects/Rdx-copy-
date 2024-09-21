@@ -1,11 +1,10 @@
- module.exports.config = {
-    name: "setdatagroup",
+module.exports.config = {
+    name: "setdatabox",
     version: "1.0",
-    permission: 2,
-    credits: "ryuko",
-    prefix: false,
-    description: "set new data of boxes into data",
-    category: "admin",
+    hasPermssion: 2,
+    credits: "D-Jukie",
+    description: "Set new data of boxes into data",
+    commandCategory: "System",
     usages: "",
     cooldowns: 5,
     
@@ -17,11 +16,11 @@ var inbox = await api.getThreadList(100, null, ['INBOX']);
   let list = [...inbox].filter(group => group.isSubscribed && group.isGroup);
   const lengthGroup = list.length
   for (var groupInfo of list) {
-    console.log(`data has been updated group id : ${groupInfo.threadID}`)
+    console.log(`data has been updated box ID: ${groupInfo.threadID}`)
     var threadInfo = await api.getThreadInfo(groupInfo.threadID);
     threadInfo.threadName;
     await Threads.setData(groupInfo.threadID, { threadInfo });
   }
-    console.log(`data has been updated ${lengthGroup} group`)
-    return api.sendMessage(`data has been updated ${lengthGroup} group`, threadID)
+    console.log(`data has been updated ${lengthGroup} box`)
+    return api.sendMessage(`data has been updated ${lengthGroup} box`, threadID)
 }

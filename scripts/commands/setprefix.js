@@ -1,13 +1,12 @@
 module.exports.config = {
 	name: "setprefix",
-	version: "0.0.2",
-	permission: 2,
-  prefix: false,
-	credits: "nayan",
-	description: "Change prefix",
-	category: "admin",
-	usages: "prefix",
-    cooldowns: 5,
+	version: "1.0.1",
+	hasPermssion: 2,
+	credits: "MirryKal",
+	description: "Reset group prefix",
+	commandCategory: "System",
+	usages: "[prefix/reset]",
+	cooldowns: 5
 };
 
 module.exports.languages ={
