@@ -1,13 +1,12 @@
 module.exports.config = {
 	name: "getlink",
-    version: "1.0.0",
-    permission: 0,
-    credits: "nayan",
-    description: "Get the URL Download from Video, Audio is sent from the group",
-    prefix: true,
-    category: "user",
-    usages: "",
-    cooldowns: 5,
+	version: "1.0.1",
+	hasPermssion: 0,
+	credits: "Mirai Team",
+	description: "Get the URL Download from Video, Audio is sent from the group",
+	commandCategory: "Tool",
+	usages: "getLink",
+	cooldowns: 5,
 };
 
 module.exports.languages = {
